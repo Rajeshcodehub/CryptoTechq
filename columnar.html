@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Columnar Transposition Cipher</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Columnar Transposition Cipher</h1>
+        <div class="cipher">
+            <textarea id="columnar-input" placeholder="Enter text to encrypt or decrypt"></textarea>
+            <input type="text" id="columnar-key" placeholder="Enter key (e.g., 31542)">
+            <button onclick="performColumnarCipher()">Encrypt</button>
+            <button onclick="performColumnarDecipher()">Decrypt</button>
+            <textarea id="columnar-output" readonly placeholder="Output"></textarea>
+        </div>
+    </div>
+    <script>
+        function encryptColumnarTransposition(text, key) {
+            let cols = key.length;
+            let rows = Math.ceil(text.length / cols);
+            let grid = Array.from({ length: rows }, () => Array(cols).fill(''));
+            let idx = 0;
+
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    if (idx < text.length) {
+                        grid[r][c] = text[idx++];
+                    }
+                }
+            }
+
+            let encrypted = '';
+            for (let k = 0; k < key.length; k++) {
+                let colIdx = key.indexOf((k + 1).toString());
+                for (let r = 0; r < rows; r++) {
+                    encrypted += grid[r][colIdx];
+                }
+            }
+
+            return encrypted;
+        }
+
+        function decryptColumnarTransposition(cipher, key) {
+            let cols = key.length;
+            let rows = Math.ceil(cipher.length / cols);
+            let grid = Array.from({ length: rows }, () => Array(cols).fill(''));
+            let idx = 0;
+
+            for (let k = 0; k < key.length; k++) {
+                let colIdx = key.indexOf((k + 1).toString());
+                for (let r = 0; r < rows; r++) {
+                    if (idx < cipher.length) {
+                        grid[r][colIdx] = cipher[idx++];
+                    }
+                }
+            }
+
+            let decrypted = '';
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    decrypted += grid[r][c];
+                }
+            }
+
+            return decrypted;
+        }
+
+        function performColumnarCipher() {
+            const input = document.getElementById('columnar-input').value;
+            const key = document.getElementById('columnar-key').value;
+            const output = encryptColumnarTransposition(input, key);
+            document.getElementById('columnar-output').value = output;
+        }
+
+        function performColumnarDecipher() {
+            const input = document.getElementById('columnar-input').value;
+            const key = document.getElementById('columnar-key').value;
+            const output = decryptColumnarTransposition(input, key);
+            document.getElementById('columnar-output').value = output;
+        }
+    </script>
+</body>
+</html>

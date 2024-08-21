@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atbash Cipher</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Atbash Cipher</h1>
+        <div class="cipher">
+            <textarea id="atbash-input" placeholder="Enter text to encrypt"></textarea>
+            <button onclick="encryptAtbash()">Encrypt</button>
+            <textarea id="atbash-output" readonly placeholder="Output"></textarea>
+        </div>
+    </div>
+    <script>
+        function encryptAtbash(text) {
+            const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            const reversed = alphabet.split('').reverse().join('');
+            const lookup = {};
+
+            for (let i = 0; i < alphabet.length; i++) {
+                lookup[alphabet[i]] = reversed[i];
+                lookup[alphabet[i].toLowerCase()] = reversed[i].toLowerCase();
+            }
+
+            return text.split('').map(char => lookup[char] || char).join('');
+        }
+
+        function performAtbashCipher() {
+            const input = document.getElementById('atbash-input').value;
+            const output = encryptAtbash(input);
+            document.getElementById('atbash-output').value = output;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hill Cipher</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Hill Cipher</h1>
+        <div>
+            <label for="hill-input">Input Text:</label>
+            <input type="text" id="hill-input">
+        </div>
+        <div>
+            <label for="hill-key">Key (comma-separated, row-wise):</label>
+            <input type="text" id="hill-key" value="6,24,1,13,16,10,20,17,15">
+        </div>
+        <button onclick="encryptHill()">Encrypt</button>
+        <button onclick="decryptHill()">Decrypt</button>
+        <div>
+            <label for="hill-output">Output Text:</label>
+            <input type="text" id="hill-output" readonly>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

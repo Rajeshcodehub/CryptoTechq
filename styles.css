@@ -1,0 +1,189 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+    overflow: hidden;
+    margin: 0;
+    height: 100vh;
+    background: #141e30; /* Fallback color */
+    background: linear-gradient(to right, #141e30, #243b55); /* Gradient background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, #141e30, #243b55); /* Gradient background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.particles div {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    animation: float 10s infinite ease-in-out;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-20px) scale(1.5);
+    }
+    100% {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.particles div:nth-child(1) {
+    left: 10%;
+    animation-duration: 7s;
+    animation-delay: 0s;
+}
+
+.particles div:nth-child(2) {
+    left: 20%;
+    animation-duration: 8s;
+    animation-delay: 2s;
+}
+
+.particles div:nth-child(3) {
+    left: 30%;
+    animation-duration: 5s;
+    animation-delay: 4s;
+}
+
+.particles div:nth-child(4) {
+    left: 40%;
+    animation-duration: 9s;
+    animation-delay: 6s;
+}
+
+.particles div:nth-child(5) {
+    left: 50%;
+    animation-duration: 6s;
+    animation-delay: 8s;
+}
+
+.particles div:nth-child(6) {
+    left: 60%;
+    animation-duration: 7s;
+    animation-delay: 10s;
+}
+
+.particles div:nth-child(7) {
+    left: 70%;
+    animation-duration: 8s;
+    animation-delay: 12s;
+}
+
+.particles div:nth-child(8) {
+    left: 80%;
+    animation-duration: 5s;
+    animation-delay: 14s;
+}
+
+.particles div:nth-child(9) {
+    left: 90%;
+    animation-duration: 9s;
+    animation-delay: 16s;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 30px;
+}
+
+.visitor-count {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.techniques {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+button {
+    background: rgba(255, 255, 255, 0.8);
+    color: #333;
+    border: none;
+    padding: 15px 25px;
+    font-size: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s, background 0.3s;
+}
+
+button:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: scale(1.05);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+.cipher {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+textarea {
+    width: 80%;
+    height: 100px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+input[type="number"],
+input[type="text"] {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 80%;
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rail Fence Cipher</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Rail Fence Cipher</h1>
+        <div class="cipher">
+            <textarea id="railfence-input" placeholder="Enter text to encrypt or decrypt"></textarea>
+            <input type="number" id="railfence-key" placeholder="Enter key (number of rails)">
+            <button onclick="performRailFenceCipher()">Encrypt</button>
+            <button onclick="performRailFenceDecipher()">Decrypt</button>
+            <textarea id="railfence-output" readonly placeholder="Output"></textarea>
+        </div>
+    </div>
+    <script>
+        function encryptRailFence(text, key) {
+            let rail = Array.from({ length: key }, () => []);
+            let dir = false;
+            let row = 0;
+
+            for (let i = 0; i < text.length; i++) {
+                rail[row].push(text[i]);
+                if (row === 0 || row === key - 1) dir = !dir;
+                row += dir ? 1 : -1;
+            }
+
+            return rail.flat().join('');
+        }
+
+        function decryptRailFence(cipher, key) {
+            let rail = Array.from({ length: key }, () => Array(cipher.length).fill(null));
+            let dir = false;
+            let row = 0;
+            let idx = 0;
+
+            for (let i = 0; i < cipher.length; i++) {
+                rail[row][i] = '*';
+                if (row === 0 || row === key - 1) dir = !dir;
+                row += dir ? 1 : -1;
+            }
+
+            for (let i = 0; i < key; i++) {
+                for (let j = 0; j < cipher.length; j++) {
+                    if (rail[i][j] === '*' && idx < cipher.length) {
+                        rail[i][j] = cipher[idx++];
+                    }
+                }
+            }
+
+            let result = '';
+            dir = false;
+            row = 0;
+
+            for (let i = 0; i < cipher.length; i++) {
+                result += rail[row][i];
+                if (row === 0 || row === key - 1) dir = !dir;
+                row += dir ? 1 : -1;
+            }
+
+            return result;
+        }
+
+        function performRailFenceCipher() {
+            const input = document.getElementById('railfence-input').value;
+            const key = parseInt(document.getElementById('railfence-key').value);
+            const output = encryptRailFence(input, key);
+            document.getElementById('railfence-output').value = output;
+        }
+
+        function performRailFenceDecipher() {
+            const input = document.getElementById('railfence-input').value;
+            const key = parseInt(document.getElementById('railfence-key').value);
+            const output = decryptRailFence(input, key);
+            document.getElementById('railfence-output').value = output;
+        }
+    </script>
+</body>
+</html>
